@@ -1,3 +1,4 @@
+import { TodoModel } from '/Todo/Models/TodoModel.js';
 import { Controller } from '/lib/Controller.js';
 import { on, debug } from '/lib/helpers.js';
 
@@ -16,6 +17,9 @@ export class AddTodoInputController extends Controller {
     const text = this.getInputText();
 
     if (text) {
+      const todo = new TodoModel();
+      todo.name = text;
+      this.collection.push(todo);
       log('add', text);
     }
   }
