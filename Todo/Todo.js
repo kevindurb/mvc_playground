@@ -11,19 +11,15 @@ export class Todo {
     this.$container = document.body;
     this.todoCollection = new TodoCollection();
 
-    this.addTodoInputView = new AddTodoInputView();
-    this.addTodoInputController = new AddTodoInputController(
-      this.addTodoInputView,
-      this.todoCollection,
-    );
+    this.addTodoInputController = new AddTodoInputController({
+      collection: this.todoCollection,
+    });
 
-    this.todoListView = new TodoListView();
-    this.todoListController = new TodoListController(
-      this.todoListView,
-      this.todoCollection,
-    );
+    this.todoListController = new TodoListController({
+      collection: this.todoCollection,
+    });
 
-    this.$container.appendChild(this.addTodoInputView.$el);
-    this.$container.appendChild(this.todoListView.$el);
+    this.$container.appendChild(this.addTodoInputController.view.$el);
+    this.$container.appendChild(this.todoListController.view.$el);
   }
 }

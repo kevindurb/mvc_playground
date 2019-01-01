@@ -1,6 +1,7 @@
 import { Controller } from '/lib/Controller.js';
+import { TodoListView } from '/Todo/Views/TodoListView.js';
 import { on, debug } from '/lib/helpers.js';
-import { TodoItemView } from '/Todo/Views/TodoItemView.js';
+import { TodoItemController } from '/Todo/Controllers/TodoItemController.js';
 
 const log = debug('TodoListController');
 
@@ -12,10 +13,12 @@ export class TodoListController extends Controller {
   }
 
   renderItem(item) {
-    const view = new TodoItemView(this.view);
-    view.label.textContent = item.name;
+    const controller = new TodoItemController({
+      model: item,
+      collection: this.collection,
+    });
 
-    this.view.appendView(view);
+    this.view.appendView(controller.view);
   }
 
   renderItems() {
@@ -23,3 +26,5 @@ export class TodoListController extends Controller {
     this.collection.forEach(this.renderItem);
   }
 }
+
+TodoListController.viewClass = TodoListView;
