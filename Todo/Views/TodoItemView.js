@@ -4,7 +4,7 @@ export class TodoItemView extends View {
 }
 
 TodoItemView.template = `
+  <input type="checkbox" data-outlet="checkbox" />
   <label data-outlet="label"></label>
   <button data-outlet="removeButton">remove</button>
-  <button data-outlet="doneButton">done</button>
 `;

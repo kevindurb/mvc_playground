@@ -7,7 +7,7 @@ const log = debug('TodoItemController');
 export class TodoItemController extends Controller {
   initialize() {
     on(this.view.removeButton, 'click', this.remove);
-    on(this.view.doneButton, 'click', this.done);
+    on(this.view.checkbox, 'change', this.setDone);
     on(this.model, 'change', this.render);
 
     this.render();
@@ -17,13 +17,13 @@ export class TodoItemController extends Controller {
     this.collection.remove(this.model);
   }
 
-  done() {
-    this.model.set('done', true);
+  setDone() {
+    this.model.set('done', this.view.checkbox.checked);
   }
 
   render() {
     this.view.label.textContent = this.model.get('name');
-    this.view.$el.setAttribute('disabled', this.model.get('done'));
+    this.view.checkbox.checked = this.model.get('done');
   }
 }
 
